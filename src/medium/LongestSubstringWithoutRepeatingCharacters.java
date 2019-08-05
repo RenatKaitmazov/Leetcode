@@ -15,48 +15,24 @@ public class LongestSubstringWithoutRepeatingCharacters {
         if (length < 2) {
             return length;
         }
-        final int initialValue = -1;
-        final int[] encounteredIndices = newArray(ALPHABET_SIZE, initialValue);
-        int start = 0;
-        int end;
+        final int[] encounteredIndices = new int[ALPHABET_SIZE];
         int longestSubstringLength = 0;
-        for (end = 0; end < length; ++end) {
-            final int charIndex = str.charAt(end);
-            final int encounteredIndex = encounteredIndices[charIndex];
-            if (encounteredIndex == initialValue) {
-                encounteredIndices[charIndex] = end;
-                continue;
+        // S is the start of the substring, e is the end.
+        for (int s = 0, e = 0; e < length; ++e) {
+            final int currentChar = str.charAt(e);
+            final int encounteredIndex = encounteredIndices[currentChar];
+            if (encounteredIndex > s) {
+                // Update the start position only if the index of the duplicate char is farther,
+                // than the current start position.
+                s = encounteredIndex;
             }
-            final int substringLength = end - start;
+            final int substringLength = e - s + 1;
             if (substringLength > longestSubstringLength) {
                 longestSubstringLength = substringLength;
             }
-            for (int i = start; i < encounteredIndex; ++i) {
-                encounteredIndices[str.charAt(i)] = initialValue;
-            }
-            encounteredIndices[charIndex] = end;
-            start = encounteredIndex + 1;
+            // +1 is used as a padding, since all values in a newly created array are zeroes.
+            encounteredIndices[currentChar] = e + 1;
         }
-        return Math.max(longestSubstringLength, end - start);
-    }
-
-    private int[] newArray(int size, int initValue) {
-        final int[] array = new int[size];
-        if (initValue != 0) {
-            for (int i = 0; i < size; ++i) {
-                array[i] = initValue;
-            }
-        }
-        return array;
-    }
-
-    public static void main(String[] args) {
-        final LongestSubstringWithoutRepeatingCharacters l = new LongestSubstringWithoutRepeatingCharacters();
-        System.out.println(l.lengthOfLongestSubstring("cdd"));
-        System.out.println(l.lengthOfLongestSubstring("qwertyuiop"));
-        System.out.println(l.lengthOfLongestSubstring("abcabcbb"));
-        System.out.println(l.lengthOfLongestSubstring("bbbbb"));
-        System.out.println(l.lengthOfLongestSubstring("pwwkew"));
-        System.out.println(l.lengthOfLongestSubstring("abba"));
+        return longestSubstringLength;
     }
 }
