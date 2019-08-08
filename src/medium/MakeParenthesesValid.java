@@ -1,8 +1,5 @@
 package medium;
 
-import java.util.Deque;
-import java.util.LinkedList;
-
 /**
  * Given a string S of '(' and ')' parentheses,
  * we add the minimum number of parentheses ( '(' or ')', and in any positions )
@@ -13,8 +10,8 @@ import java.util.LinkedList;
  * • It can be written as (A), where A is a valid string.
  * Given a parentheses string, return the minimum number of parentheses we must add to make the resulting string valid.
  * Note:
- *  S.length <= 1000
- *  S only consists of '(' and ')' characters.
+ * S.length <= 1000
+ * S only consists of '(' and ')' characters.
  *
  * @author Renat Kaitmazov
  */
@@ -25,24 +22,24 @@ public final class MakeParenthesesValid {
     private static final char CLOSE = ')';
 
     public int minAddToMakeValid(String str) {
-        final Deque<Character> stack = new LinkedList<>();
         final int length = str.length();
-        int missingParenthesis = 0;
+        int missingParenthesisCount = 0;
+        int openedParenthesisCount = 0;
         for (int i = 0; i < length; ++i) {
             final char currentChar = str.charAt(i);
             switch (currentChar) {
                 case OPEN:
-                    stack.push(currentChar);
+                    ++openedParenthesisCount;
                     break;
                 case CLOSE:
-                    if (stack.isEmpty()) {
-                        ++missingParenthesis;
+                    if (openedParenthesisCount == 0) {
+                        ++missingParenthesisCount;
                         continue;
                     }
-                    stack.pop();
+                    --openedParenthesisCount;
                     break;
             }
         }
-        return missingParenthesis + stack.size();
+        return missingParenthesisCount + openedParenthesisCount;
     }
 }
