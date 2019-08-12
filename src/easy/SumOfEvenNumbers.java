@@ -1,7 +1,5 @@
 package easy;
 
-import java.util.Arrays;
-
 /**
  * We have an array A of integers, and an array queries of queries.
  * For the i-th query val = queries[i][0], index = queries[i][1], we add val to A[index].
@@ -60,21 +58,5 @@ public final class SumOfEvenNumbers {
             }
         }
         return sum;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(
-                Arrays.toString(
-                        new SumOfEvenNumbers().sumEvenAfterQueries(
-                                new int[]{1, 2, 3, 4},
-                                new int[][] {
-                                        {1, 0},
-                                        {-3, 1},
-                                        {-4, 0},
-                                        {2, 3}
-                                }
-                        )
-                )
-        );
     }
 }
