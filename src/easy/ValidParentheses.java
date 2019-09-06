@@ -33,16 +33,16 @@ public final class ValidParentheses {
                     stack[currentSymbolPointer++] = 2;
                     break;
                 case '}':
-                    if (currentSymbolPointer == 0) return false;
-                    if (stack[--currentSymbolPointer] != 2) return false;
+                    if (currentSymbolPointer == 0
+                            || stack[--currentSymbolPointer] != 2) return false;
                     break;
                 case ')':
-                    if (currentSymbolPointer == 0) return false;
-                    if (stack[--currentSymbolPointer] != 1) return false;
+                    if (currentSymbolPointer == 0
+                            || stack[--currentSymbolPointer] != 1) return false;
                     break;
                 case ']':
-                    if (currentSymbolPointer == 0) return false;
-                    if (stack[--currentSymbolPointer] != 0) return false;
+                    if (currentSymbolPointer == 0
+                            || stack[--currentSymbolPointer] != 0) return false;
                     break;
             }
         }
