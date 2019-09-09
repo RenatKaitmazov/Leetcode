@@ -15,6 +15,9 @@ public final class ValidParentheses {
 
     public boolean isValid(String s) {
         final int length = s.length();
+        if (length % 2 != 0) {
+            return false;
+        }
         final int halfLength = (length >> 1) + length % 2;
         final byte[] stack = new byte[halfLength];
         int currentSymbolPointer = 0;
