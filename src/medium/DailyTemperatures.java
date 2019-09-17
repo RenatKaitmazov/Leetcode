@@ -56,9 +56,4 @@ public final class DailyTemperatures {
             return 0;
         }
     }
-
-    public static void main(String[] args) {
-        final int[] temps = {89, 62, 70, 58, 47, 47, 46, 76, 100, 70};
-        new DailyTemperatures().dailyTemperatures(temps);
-    }
 }
