@@ -2,7 +2,6 @@ package medium;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -18,29 +17,45 @@ import java.util.List;
 public final class ThreeSum {
 
     public List<List<Integer>> threeSum(int[] nums) {
-        final LinkedHashSet<List<Integer>> set = new LinkedHashSet<>();
+        final List<List<Integer>> triplets = new ArrayList<>();
         Arrays.sort(nums);
-        final int size = nums.length;
-        for (int i = 0; i < size; ++i) {
-            final int first = nums[i];
-            for (int j = i + 1; j < size; ++j) {
-                final int second = nums[j];
-                final int diff = -(first + second);
-                if (Arrays.binarySearch(nums, j + 1, size, diff) > -1) {
-                    final List<Integer> triplet = new ArrayList<>(3);
-                    triplet.add(first);
-                    triplet.add(second);
-                    triplet.add(diff);
-                    set.add(triplet);
+        final int size = nums.length - 1;
+        final int outerSize = size - 1;
+        for (int i = 0; i < outerSize; ++i) {
+            final int currentNum = nums[i];
+            if (currentNum > 0) {
+                break;
+            }
+            int s = i + 1;
+            int e = size;
+            while (s < e) {
+                final int startNum = nums[s];
+                final int endNum = nums[e];
+                final int sum = currentNum + startNum + endNum;
+                if (sum < 0) ++s;
+                else if (sum > 0) --e;
+                else {
+                    if (i == 0 || nums[i - 1] != currentNum) {
+                        final TripletList triplet = new TripletList(currentNum, startNum, endNum);
+                        if (triplets.isEmpty() || !triplets.get(triplets.size() - 1).equals(triplet)) {
+                            triplets.add(triplet);
+                        }
+                    }
+                    ++s;
+                    --e;
                 }
             }
         }
-        final List<List<Integer>> triplets = new ArrayList<>(set.size());
-        triplets.addAll(set);
         return triplets;
     }
 
-    public static void main(String[] args) {
-        new ThreeSum().threeSum(new int[]{-1, 0, 1, 2, -1, -4});
+    private static final class TripletList extends ArrayList<Integer> {
+
+        TripletList(int first, int second, int third) {
+            super(3);
+            add(first);
+            add(second);
+            add(third);
+        }
     }
 }
