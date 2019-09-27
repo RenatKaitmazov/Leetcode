@@ -25,10 +25,4 @@ public final class MaximumSubarray {
         }
         return max;
     }
-
-    public static void main(String[] args) {
-        final int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
-        final int maxSum = new MaximumSubarray().maxSubArray(nums);
-        System.out.println(maxSum);
-    }
 }
