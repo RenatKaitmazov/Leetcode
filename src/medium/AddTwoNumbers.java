@@ -44,7 +44,7 @@ public final class AddTwoNumbers {
     /**
      * Definition for singly-linked list.
      */
-    public class ListNode {
+    private static final class ListNode {
         int val;
         ListNode next;
 
