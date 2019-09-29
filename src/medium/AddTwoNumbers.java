@@ -4,7 +4,7 @@ package medium;
  * You are given two non-empty linked lists representing two non-negative integers.
  * The digits are stored in reverse order and each of their nodes contain a single digit.
  * Add the two numbers and return it as a linked list.
- *
+ * <p>
  * You may assume the two numbers do not contain any leading zero, except the number 0 itself.
  *
  * @author Renat Kaitmazov
@@ -29,15 +29,14 @@ public final class AddTwoNumbers {
             if (head == null) {
                 head = sumNode;
                 tail = sumNode;
-            }
-            else {
+            } else {
                 tail.next = sumNode;
                 tail = sumNode;
             }
             if (lhs != null) lhs = lhs.next;
             if (rhs != null) rhs = rhs.next;
         }
-        if (carry > 0) tail.next= new ListNode(carry);
+        if (carry > 0) tail.next = new ListNode(carry);
         return head;
     }
 
