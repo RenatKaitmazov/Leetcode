@@ -17,7 +17,7 @@ public final class PalindromeLinkedList {
             values[i] = current.val;
             current = current.next;
         }
-        if ((size & 1) == 1) {
+        if ((size & 1) != 0) {
             current = current.next;
         }
         for (int i = halfSize - 1; i > -1; --i) {
@@ -49,10 +49,5 @@ public final class PalindromeLinkedList {
         ListNode(int x) {
             val = x;
         }
-    }
-
-    public static void main(String[] args) {
-        final boolean answer = new PalindromeLinkedList().isPalindrome(new ListNode(21));
-        System.out.println(answer);
     }
 }
